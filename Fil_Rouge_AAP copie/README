@@ -1,0 +1,8 @@
+nom du bot pour le tournoi : paqueteam
+
+
+Les trois programmes ont été modifiés par rapport au dernier rendu.
+Est-il possible de prendre en compte ceux-ci à la place ?
+Merci d'avance.
+
+Pour compiler le programme numéro i, il faut décommenter le "#define MAINi" et commenter les deux "#define MAINj" pour j dans {1;2;3}\i
