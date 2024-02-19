@@ -1,0 +1,54 @@
+FR
+Trois programmes sont proposés pour vous permettre de mettre au point les programmes qui participeront au tournoi final qui déterminera un classement. 
+
+- defi permet de jouer contre un programme (temps fixe par coup) 
+- duel permet de faire jouer deux programmes l'un contre l'autre (contre de temps identique au tournoi : 15min+30s/coup)
+- tournoi permet de lancer un tournoi faisant concourir tous les programmes présents dans le répertoire "joueurs" dont le nom commence par "j". 
+
+--- RAPPEL & CONDITIONS d'EXECUTION : ----
+
+Les programmes joueur sont destinataires d'une chaine FEN et du nombre de secondes restantes pour le reste de la partie. Ils doivent renvoyer sur la sortie standard le coup qu'ils veulent jouer, à l'exception de toute autre chose. 
+
+--- Programme defi ---- 
+
+defi <path_prog1> <o|x> <delai>
+
+Ce programme permet de joueur contre un adversaire informatique. 
+- Le premier argument désigne le chemin du programme adversaire (commencer par ./ pour désigner un chemin relatif) ;
+- Le second argument désigne la couleur à jouer par le joueur humain ;
+- Le troisième argument désigne le temps offert au programme adversaire pour chaque coup (pas de décrémentation du temp d'un coup à l'autre). 
+
+--- Programme duel ---- 
+
+duel <path_prog1> <path_prog2>
+
+Ce programme permet de faire jouer ensemble deux adversaires informatiques. 
+Chaque argument désigne le chemin des programmes qui doivent s'affronter (commencer par ./ pour désigner un chemin relatif). 
+
+
+
+ENG
+Three programs are provided to allow you to develop the programs that will participate in the final tournament to determine a ranking.
+
+"defi" allows you to play against a program (fixed time per move).
+"duel" allows two programs to play against each other (with the same time control as the tournament: 15 minutes + 30 seconds per move).
+"tournoi" allows you to launch a tournament involving all the programs present in the "players" directory whose names start with "j".
+--- REMINDER & EXECUTION CONDITIONS: ---
+
+The player programs receive a FEN string and the remaining time in seconds for the rest of the game. They must return on the standard output the move they want to play, to the exclusion of anything else.
+
+--- "defi" Program ---
+
+defi <path_prog1> <o|x> <delay>
+
+This program allows you to play against a computer opponent.
+
+The first argument specifies the path of the opponent program (start with ./ to specify a relative path);
+The second argument specifies the color to be played by the human player;
+The third argument specifies the time offered to the opponent program for each move (no decrement of time from one move to another).
+--- "duel" Program ---
+
+duel <path_prog1> <path_prog2>
+
+This program allows two computer opponents to play against each other.
+Each argument specifies the path of the programs that must compete (start with ./ to specify a relative path).

@@ -1,0 +1,15 @@
+FR 
+Ce projet vise à simuler le comportement d'une foule lors de la sortie d'un espace clos.
+Il vise à montrer l'influence d'obstacles placés devant la sortie.
+2 programmes de simulation de foule sont disponibles.
+L'un avec une porte et l'autre avec deux portes.
+On peut décommenter selon les obstacles que l'on veut ou non
+mettre.
+Un tracé apparaît lors de l'arrêt de la simulation.
+Il représente La vitesse en fonction des positions.
+On peut faire apparaître le temps de la simulation en appuyant sur "entrer" lorsque toutes les billes sont sorties.
+ 
+
+
+ENG
+This project aims to simulate the behavior of a crowd during the exit from an enclosed space. It aims to demonstrate the influence of obstacles placed in front of the exit. Two crowd simulation programs are available: one with a single door and the other with two doors. One can uncomment based on the obstacles they want to include or not. A plot appears upon stopping the simulation, representing the speed as a function of position. The simulation time can be displayed by pressing "enter" once all the particles have exited.

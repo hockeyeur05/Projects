@@ -1,0 +1,8 @@
+FR
+Ce projet implémente et permet de jouer au morpion et au super morpion.
+On utilise les notations FEN pour pouvoir jouer.
+Aller dans le fichier tournoi-super-morpion pour avoir plus d'informations sur comment utiliser le bot.
+
+
+ENG 
+This project implements and allows playing Tic-Tac-Toe and Super Tic-Tac-Toe. FEN notations are used for playing. Refer to the "tournament-super-tic-tac-toe" file for more information on how to use the bot.

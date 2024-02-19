@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tttree.h"
+
 
 T_superGrille coup_super_grille(T_superGrille * super_grille, int numero_grille, int position, T_valeur coup_joue) {
     //coup dans la super grille
@@ -54,33 +54,6 @@ T_superGrille super_coup(T_superGrille super_grille) {
     return  super_grille;
 }
 
-/*
-T_superGrille super_coup(T_superGrille super_grille) { 
-    // Ensure the grilles array is large enough to include the large grid at index MAXLEN
-    for(int i = 0; i < MAXLEN; i++) {
-        int result = eval_fin(super_grille.grilles[i]);
-        if (result == 1 || result == 2 || result == 3) {
-            T_valeur coupVal = (result == 1) ? ROND : (result == 2) ? CROIX : VIDE;
-            super_grille.grilles[MAXLEN] = coup(super_grille.grilles[MAXLEN], i, coupVal);
-            super_grille.grilles[MAXLEN].trait = VIDE;  
-            super_grille.super_jeu_fini = eval_fin_super_grille(super_grille);
-            return super_grille;
-        }
-    }
-    return super_grille;
-} */
- 
-/*int eval_fin_super_grille(T_superGrille super_grille) { //répond au problème que pose le case 3 précédent 
-                                                         //(comment voir si la partie est finie)
-    if(eval_fin(super_grille.grilles[MAXLEN]) != 0) return eval_fin(super_grille.grilles[MAXLEN]);
-    else {
-        int i;
-        for(i=0;i<MAXLEN;i++) {
-            if(eval_fin(super_grille.grilles[i]) == 0) return 0; //si sur une des grille la partie continue alors ce n'est pas fini
-        }
-        return 3;
-    }
-}*/
 int eval_fin_super_grille(T_superGrille super_grille) { //répond au problème que pose le case 3 précédent 
                                                          //(comment voir si la partie est finie)
 return eval_fin(super_grille.grilles[MAXLEN]);
@@ -187,59 +160,6 @@ int l(char * mot ) {
     return i;
 }
 
-/*T_superGrille fen_to_super_grille(char * code_fen) {
-        if (code_fen == NULL) {  // Example validation
-        fprintf(stderr, "Invalid input string\n");
-        return (T_superGrille){0};  // Return an initialized structure
-    }
-    int len = l(code_fen);
-    char trait = code_fen[len-2];
-    int i;
-    T_superGrille super_grille;
-    T_grille * grilles[MAXLEN+1];
-    super_grille.trait = trait;
-    super_grille.dernier_coup_joue = (code_fen[len-4] - '0' ) * 10 + code_fen[len-3] - '0' ;
-    super_grille.super_jeu_fini = 0;
-    char ** fen_grilles = malloc(sizeof(char*)*MAXLEN);
-    fen_grilles = decoupe(code_fen,trait);
-
-    if (fen_grilles == NULL) {
-        fprintf(stderr,"erreur\n");
-        T_superGrille s = {0};
-        return s;
-    }
-    for (i=0;i<MAXLEN; i++) { 
-        char valeur = fen_grilles[i][0];
-        if ( (valeur == 'O') || (valeur == 'X') ) {
-            int k;
-            for (k=0;k<MAXLEN; k++) {
-                super_grille.grilles[i].cases[k].valeur = char_to_valeur2(valeur);
-            }
-            super_grille.grilles[i].trait = VIDE;
-            super_grille.grilles[i].jeu_fini = eval_fin(super_grille.grilles[i]);
-        }
-        else {
-        super_grille.grilles[i] = fen_to_grille(fen_grilles[i]);
-        }
-            for (int l = 0; l < MAXLEN; l++) {
-        if (fen_grilles[l] != NULL) {
-            free(fen_grilles[l]); // Free each string after processing
-        }
-    }
-
-    }
-    free(fen_grilles);  // Free the array itself
-    fen_grilles = NULL;
-    
-    //T_superGrille res = super_coup(super_grille);
-  //  res.super_jeu_fini = eval_fin_super_grille(res);
-    //res.dernier_coup_joue = (code_fen[len-5] - '0' - 1) * 10 + code_fen[len-4] - '0' - 1;
-    return super_coup(super_grille);
-}*/
-
-
-
-
 void print_super_grille(T_superGrille * super_grille) {
     int i;
     int j;
@@ -268,87 +188,6 @@ void print_super_grille(T_superGrille * super_grille) {
         if ((k+1)%3==0) printf("\n");
     }
 } 
-
-
-/*
-char **decoupe(char *code_fen, char trait) {
-    if (code_fen == NULL) return NULL;
-
-    char **res = malloc(MAXLEN * sizeof(char *));
-    if (res == NULL) {
-        fprintf(stderr, "Memory allocation failed in decoupe\n");
-        return NULL;
-    }
-
-    int position = 0, i = 0, compteur_puissance = 0;
-    int debuts[MAXLEN + 1] = {0}, fins[MAXLEN + 1] = {0};
-    fins[MAXLEN - 1] = strlen(code_fen) - 5; // exclude trait, last move, and spaces
-
-    while ((code_fen[position] != ' ') && (i < MAXLEN) && (position < MAXLEN * MAXLEN + 5)) {
-        compteur_puissance += puissance(code_fen[position]);
-        fins[i]++;
-        if (compteur_puissance % 9 == 0) {
-            debuts[i + 1] = fins[i];
-            fins[i + 1] = debuts[i + 1];
-            char *cut_str = coupe(code_fen, debuts[i], fins[i] - 1);
-            if (cut_str == NULL) {
-                fprintf(stderr, "Memory allocation failed in coupe\n");
-                // Free previously allocated memory
-                for (int j = 0; j < i; j++) free(res[j]);
-                free(res);
-                return NULL;
-            }
-            res[i] = concat(cut_str, " ");
-            free(cut_str); // freeing memory allocated by coupe
-            if (res[i] == NULL) {
-                fprintf(stderr, "Memory allocation failed in concat\n");
-                // Free previously allocated memory
-                for (int j = 0; j <= i; j++) free(res[j]);
-                free(res);
-                return NULL;
-            }
-            i++;
-        }
-        position++;
-    }
-
-    if (i < MAXLEN) {
-        res[i] = NULL; // Marking the end of valid strings in the array
-    }
-
-    return res;
-}*/
-
-/*
-T_superGrille fen_to_super_grille(char * code_fen) {
-    if (code_fen == NULL || strlen(code_fen) < 5) {
-        fprintf(stderr, "Error: Invalid input string\n");
-        T_superGrille s = {0}; // Initialize s to a default state
-        return s;
-    }
-
-    int len = l(code_fen);
-    char trait = code_fen[len-2];
-    char ** fen_grilles = decoupe(code_fen,trait);
-    if (fen_grilles == NULL) {
-        fprintf(stderr,"Error: decoupe returned NULL\n");
-        T_superGrille s = {0}; // Initialize s to a default state
-        return s;
-    }
-
-    T_superGrille super_grille;
-    super_grille.trait = trait;
-    for (int i = 0; i < MAXLEN; i++) { 
-        // ... rest of the logic ...
-
-        free(fen_grilles[i]); // Free each string after processing
-    }
-    free(fen_grilles); // Free the array of strings after use
-
-    T_superGrille res = super_coup(super_grille);
-    res.super_jeu_fini = eval_fin_super_grille(res);
-    res.dernier_coup_joue = (code_fen[len-5] - '0' - 1) * 10 + code_fen[len-4] - '0' - 1;
-    return res; }*/
 
 T_superGrille fen_to_super_grille_bis(char * code_fen) {
     if (code_fen == NULL) {  // Example validation
